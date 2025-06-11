@@ -1,9 +1,15 @@
 plugins {
-    kotlin("jvm") version "1.9.25" apply false
-    kotlin("plugin.spring") version "1.9.25" apply false
-    kotlin("plugin.jpa") version "1.9.25" apply false
-    id("org.springframework.boot") version "3.5.0" apply false
-    id("io.spring.dependency-management") version "1.1.7" apply false
+    id("org.springframework.boot") version "3.5.0"
+    id("io.spring.dependency-management") version "1.1.7"
+
+
+    kotlin("kapt") version "1.9.25"
+    kotlin("jvm") version "1.9.25"
+    kotlin("plugin.spring") version "1.9.25"
+    kotlin("plugin.jpa") version "1.9.25"
+
+    id("io.gitlab.arturbosch.detekt") version "1.23.7"
+    id("org.jetbrains.kotlinx.kover") version "0.9.1"
 }
 
 allprojects {
@@ -17,6 +23,7 @@ allprojects {
 
 subprojects {
     apply(plugin = "org.springframework.boot")
+    apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
     apply(plugin = "org.jetbrains.kotlin.jvm")
@@ -40,8 +47,11 @@ subprojects {
         }
     }
 
-    // Optional: Kotlin compiler args
-    extensions.configure<org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions> {
-        freeCompilerArgs.addAll("-Xjsr305=strict")
+    // Configure Kotlin compiler options
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "21"
+        }
     }
 }

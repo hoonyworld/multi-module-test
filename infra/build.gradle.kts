@@ -1,13 +1,11 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 dependencies {
-    implementation(project(":global-utils"))
+    implementation(project(":global-utlis"))
     implementation(project(":domain"))
 }
 
 tasks {
-    jar {
-        enabled = true
-    }
-    bootJar {
-        enabled = false
-    }
+    withType<Jar> { enabled = true }
+    withType<BootJar> { enabled = false }
 }
