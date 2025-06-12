@@ -55,7 +55,9 @@ subprojects {
     }
 }
 
-
 tasks.register("buildAll") {
+    group = "build"
+    description = "Builds all modules: apis, admin, batch"
+
     dependsOn(":apis:build", ":admin:build", ":batch:build")
 }
