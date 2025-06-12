@@ -7,5 +7,5 @@ include(
     "batch",
     "domain",
     "infra",
-    "global-utlis"
+    "global-utils"
 )
