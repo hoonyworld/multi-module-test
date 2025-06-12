@@ -4,6 +4,8 @@ dependencies {
     implementation(project(":infra"))
     implementation(project(":domain"))
     implementation(project(":global-utils"))
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks {
