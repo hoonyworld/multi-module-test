@@ -54,3 +54,8 @@ subprojects {
         }
     }
 }
+
+
+tasks.register("buildAll") {
+    dependsOn(":apis:build", ":admin:build", ":batch:build")
+}
