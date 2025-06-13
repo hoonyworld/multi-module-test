@@ -5,13 +5,11 @@ object Plugins {
     const val KOVER = "org.jetbrains.kotlinx.kover"
 
     object Kotlin {
-        // 전체 경로 (apply 용)
         const val ALLOPEN = "org.jetbrains.kotlin.plugin.allopen"
         const val SPRING = "org.jetbrains.kotlin.plugin.spring"
         const val JPA = "org.jetbrains.kotlin.plugin.jpa"
         const val JVM = "org.jetbrains.kotlin.jvm"
 
-        // 짧은 형태 (kotlin() 함수용)
         object Short {
             const val KAPT = "kapt"
             const val JVM = "jvm"

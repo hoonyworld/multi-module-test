@@ -17,8 +17,5 @@ object Dependencies {
         const val INFRA = ":infra"
         const val DOMAIN = ":domain"
         const val GLOBAL_UTILS = ":global-utils"
-        const val APIS = ":apis"
-        const val ADMIN = ":admin"
-        const val BATCH = ":batch"
     }
 }

@@ -53,16 +53,6 @@ subprojects {
     }
 }
 
-tasks.register("buildAll") {
-    group = "build"
-    description = "Builds all modules: apis, admin, batch"
-    dependsOn(
-        "${Dependencies.Projects.APIS}:build",
-        "${Dependencies.Projects.ADMIN}:build",
-        "${Dependencies.Projects.BATCH}:build"
-    )
-}
-
 tasks {
     withType<Jar> { enabled = true }
     withType<BootJar> { enabled = false }
