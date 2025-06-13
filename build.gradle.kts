@@ -1,36 +1,32 @@
 plugins {
-    id("org.springframework.boot") version "3.5.0"
-    id("io.spring.dependency-management") version "1.1.7"
-
-    kotlin("kapt") version "1.9.25"
-    kotlin("jvm") version "1.9.25"
-    kotlin("plugin.spring") version "1.9.25"
-    kotlin("plugin.jpa") version "1.9.25"
-
-    id("io.gitlab.arturbosch.detekt") version "1.23.1"
-    id("org.jetbrains.kotlinx.kover") version "0.9.1"
+    id(Plugins.SPRING_BOOT) version Versions.SPRING_BOOT
+    id(Plugins.SPRING_DEPENDENCY_MANAGEMENT) version Versions.SPRING_DEPENDENCY_MANAGEMENT
+    kotlin(Plugins.Kotlin.Short.KAPT) version Versions.KOTLIN
+    kotlin(Plugins.Kotlin.Short.JVM) version Versions.KOTLIN
+    kotlin(Plugins.Kotlin.Short.SPRING) version Versions.KOTLIN
+    kotlin(Plugins.Kotlin.Short.JPA) version Versions.KOTLIN
+    id(Plugins.DETEKT) version Versions.DETEKT
+    id(Plugins.KOVER) version Versions.KOVER
 }
 
 allprojects {
     group = "org"
     version = "0.0.1-SNAPSHOT"
-
     repositories {
         mavenCentral()
     }
 }
 
 subprojects {
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
-    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
-    apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
-    apply(plugin = "org.jetbrains.kotlin.jvm")
-
+    apply(plugin = Plugins.SPRING_BOOT)
+    apply(plugin = Plugins.SPRING_DEPENDENCY_MANAGEMENT)
+    apply(plugin = Plugins.Kotlin.SPRING)
+    apply(plugin = Plugins.Kotlin.JPA)
+    apply(plugin = Plugins.Kotlin.JVM)
 
     java {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(21))
+            languageVersion.set(JavaLanguageVersion.of(Versions.JAVA_VERSION.toInt()))
         }
     }
 
@@ -38,7 +34,7 @@ subprojects {
         useJUnitPlatform()
     }
 
-    plugins.withId("org.jetbrains.kotlin.plugin.allopen") {
+    plugins.withId(Plugins.Kotlin.ALLOPEN) {
         extensions.configure<org.jetbrains.kotlin.allopen.gradle.AllOpenExtension> {
             annotation("jakarta.persistence.Entity")
             annotation("jakarta.persistence.MappedSuperclass")
@@ -50,7 +46,7 @@ subprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "21"
+            jvmTarget = Versions.JAVA_VERSION
         }
     }
 }
@@ -58,6 +54,9 @@ subprojects {
 tasks.register("buildAll") {
     group = "build"
     description = "Builds all modules: apis, admin, batch"
-
-    dependsOn(":apis:build", ":admin:build", ":batch:build")
+    dependsOn(
+        "${Dependencies.Projects.APIS}:build",
+        "${Dependencies.Projects.ADMIN}:build",
+        "${Dependencies.Projects.BATCH}:build"
+    )
 }

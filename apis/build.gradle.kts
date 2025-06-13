@@ -1,19 +1,18 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 dependencies {
-    implementation(project(":infra"))
-    implementation(project(":domain"))
-    implementation(project(":global-utils"))
+    implementation(project(Dependencies.Projects.INFRA))
+    implementation(project(Dependencies.Projects.DOMAIN))
+    implementation(project(Dependencies.Projects.GLOBAL_UTILS))
 
+    implementation(Dependencies.Spring.BOOT_STARTER_WEB)
+    implementation(Dependencies.Spring.BOOT_STARTER_DATA_JPA)
+    implementation(Dependencies.Spring.BOOT_STARTER_SECURITY)
+    implementation(Dependencies.Spring.BOOT_STARTER_VALIDATION)
+    implementation(Dependencies.Spring.BOOT_STARTER_ACTUATOR)
+    implementation(Dependencies.Database.MYSQL_CONNECTOR)
 
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("com.mysql:mysql-connector-j")
-
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation(Dependencies.Spring.BOOT_STARTER_TEST)
 }
 
 tasks {

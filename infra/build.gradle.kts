@@ -1,10 +1,10 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 dependencies {
-    implementation(project(":global-utils"))
-    implementation(project(":domain"))
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation(project(Dependencies.Projects.GLOBAL_UTILS))
+    implementation(project(Dependencies.Projects.DOMAIN))
+    implementation(Dependencies.Spring.BOOT_STARTER_WEB)
+    testImplementation(Dependencies.Spring.BOOT_STARTER_TEST)
 }
 
 tasks {
